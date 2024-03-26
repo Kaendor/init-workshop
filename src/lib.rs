@@ -5,12 +5,18 @@ mod iterators;
 mod structs;
 
 pub fn chapters() {
+    // Blessed.rs recense les crates qui sont actuellement les standards rust pour diverse
+    // opérations.
+    // Comme la gestion d'erreur, le logging, les maths ou autres compilations vers de l'embarqué
+    // type ESP32
+    //
+    //
     let Some(_) = variables_and_control_flow() else {
         panic!("Premier niveau pas terminé");
     };
 
     let Some(_) = modules_and_structs() else {
-        panic!("Premier niveau pas terminé");
+        panic!("Second chapitre non terminé");
     };
 }
 
