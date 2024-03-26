@@ -35,5 +35,13 @@ fn variables_and_control_flow() {
     // Ici on voit un Range, qui est un Iterator sur des chiffres entiers.
     for c in 0..iteration_count {
         println!("{c}");
+
+        counter += 2;
     }
+
+    // Premier exercice
+    // Declaration, conditions, boucles
+    // Muter dans une boucle ?
+    // Assigner un range à une variable ?
+    // Muter la même chose à plusieurs endroits
 }
