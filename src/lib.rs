@@ -2,6 +2,7 @@ use structs::modules_and_structs;
 
 mod enums;
 mod iterators;
+mod server;
 mod structs;
 
 pub fn chapters() {
