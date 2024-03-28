@@ -1,6 +1,7 @@
 use structs::modules_and_structs;
 
 mod enums;
+pub mod game;
 mod iterators;
 mod server;
 mod structs;
