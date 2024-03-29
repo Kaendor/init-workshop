@@ -1,6 +1,6 @@
 use std::sync::{Arc, Mutex};
 
-use axum::{http::StatusCode, routing::post, Json, Router};
+use axum::{extract::State, http::StatusCode, routing::post, Json, Router};
 
 use crate::game::{self, Player};
 
@@ -14,7 +14,7 @@ struct AppState {
 }
 
 impl AppState {
-    pub fn store_player(&mut self, player: Player) {
+    pub fn store_player(&self, player: Player) {
         let Ok(mut store) = self.player_store.lock() else {
             return;
         };
@@ -41,8 +41,13 @@ pub async fn server() {
         .expect("unable to start server");
 }
 
-async fn create_player(Json(payload): Json<CreatePlayer>) -> (StatusCode, Json<Player>) {
+async fn create_player(
+    Json(payload): Json<CreatePlayer>,
+    state: State<AppState>,
+) -> (StatusCode, Json<Player>) {
     let player = game::create_player(payload.pseudo);
+
+    state.store_player(player.clone());
 
     (StatusCode::CREATED, Json(player))
 }
