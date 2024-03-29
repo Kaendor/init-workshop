@@ -280,6 +280,8 @@ name = "init-workshop"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "http-body-util",
+ "mime",
  "serde",
  "serde_json",
  "tokio",

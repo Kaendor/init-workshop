@@ -1,4 +1,8 @@
-use axum::{http::StatusCode, routing::get, Json, Router};
+use axum::{
+    http::StatusCode,
+    routing::{get, post},
+    Json, Router,
+};
 
 use crate::game::{self, Player};
 
@@ -7,7 +11,7 @@ use self::payloads::CreatePlayer;
 mod payloads;
 
 pub fn routes() -> Router {
-    Router::new().route("/player", get(create_player))
+    Router::new().route("/player", post(create_player))
 }
 
 pub async fn server() {
@@ -23,7 +27,7 @@ pub async fn server() {
 }
 
 async fn create_player(Json(payload): Json<CreatePlayer>) -> (StatusCode, Json<Player>) {
-    let player = game::create_player();
+    let player = game::create_player(payload.pseudo);
 
     (StatusCode::CREATED, Json(player))
 }

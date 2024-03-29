@@ -27,7 +27,7 @@ fn variables_and_control_flow() -> Option<()> {
     let url = "https://indy.fr";
 
     // Rust favorise les approches immutable mais permet de muter au besoin avec le mot clé mut
-    let counter = 0;
+    let mut counter = 0;
     // On peut voir que le compilateur indique clairement qu'on ne peut pas muter une variable
     // immutable.
 
@@ -62,8 +62,8 @@ fn variables_and_control_flow() -> Option<()> {
     // TODO: écrire le code manquant et/ou modifier la déclaration au dessus afin de faire passer la condition suivante
 
     if dev_count >= 50 {
-        return Some(());
+        Some(())
     } else {
-        return None;
+        None
     }
 }

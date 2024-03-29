@@ -1,12 +1,12 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
-use crate::chapters;
-
-pub fn create_player() -> Player {
-    chapters();
+pub fn create_player(pseudo: String) -> Player {
+    Player { pseudo, level: 0 }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Player {
     pub pseudo: String,
+    pub level: u32,
+    // Ajouter une classe en utilisant une enum
 }
