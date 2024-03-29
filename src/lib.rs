@@ -3,7 +3,7 @@ use structs::modules_and_structs;
 mod enums;
 pub mod game;
 mod iterators;
-mod server;
+pub mod server;
 mod structs;
 
 pub fn chapters() {

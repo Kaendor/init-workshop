@@ -6,8 +6,12 @@ use self::payloads::CreatePlayer;
 
 mod payloads;
 
+pub fn routes() -> Router {
+    Router::new().route("/player", get(create_player))
+}
+
 pub async fn server() {
-    let app = Router::new().route("/player", get(create_player));
+    let app = routes();
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
         .await
