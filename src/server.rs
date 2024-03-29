@@ -1,3 +1,5 @@
+use std::sync::{Arc, Mutex};
+
 use axum::{http::StatusCode, routing::post, Json, Router};
 
 use crate::game::{self, Player};
@@ -6,8 +8,25 @@ use self::payloads::CreatePlayer;
 
 mod payloads;
 
+#[derive(Clone, Default)]
+struct AppState {
+    player_store: Arc<Mutex<Vec<Player>>>,
+}
+
+impl AppState {
+    pub fn store_player(&mut self, player: Player) {
+        let Ok(mut store) = self.player_store.lock() else {
+            return;
+        };
+
+        store.push(player);
+    }
+}
+
 pub fn routes() -> Router {
-    Router::new().route("/player", post(create_player))
+    Router::new()
+        .route("/player", post(create_player))
+        .with_state(AppState::default())
 }
 
 pub async fn server() {
