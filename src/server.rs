@@ -1,8 +1,4 @@
-use axum::{
-    http::StatusCode,
-    routing::{get, post},
-    Json, Router,
-};
+use axum::{http::StatusCode, routing::post, Json, Router};
 
 use crate::game::{self, Player};
 
