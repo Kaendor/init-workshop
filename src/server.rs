@@ -36,6 +36,7 @@ pub async fn server() {
         .await
         .expect("unable to bind the listener on local port 3000");
 
+    println!("Server started on 0.0.0.0:3000");
     axum::serve(listener, app)
         .await
         .expect("unable to start server");

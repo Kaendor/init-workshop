@@ -1,5 +1,6 @@
-use init_workshop::chapters;
+use init_workshop::server;
 
-fn main() {
-    chapters()
+#[tokio::main]
+async fn main() {
+    server::server().await;
 }
