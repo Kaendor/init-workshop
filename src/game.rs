@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-pub fn create_player(pseudo: String) -> Player {
+pub fn create_player_service(pseudo: String) -> Player {
     Player { pseudo, level: 0 }
 }
 

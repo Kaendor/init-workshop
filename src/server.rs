@@ -44,9 +44,9 @@ pub async fn server() {
 
 async fn create_player(
     Json(payload): Json<CreatePlayer>,
-    state: State<AppState>,
+    State(state): State<AppState>,
 ) -> (StatusCode, Json<Player>) {
-    let player = game::create_player(payload.pseudo);
+    let player = game::create_player_service(payload.pseudo);
 
     state.store_player(player.clone());
 
