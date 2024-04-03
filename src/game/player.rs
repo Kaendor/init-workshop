@@ -13,6 +13,7 @@ pub struct Player {
     /// Chaque commentaire avec triple /// sera compilé en documentation via cargo doc --open
     pub pseudo: String,
     pub level: u32,
+    /// Un membre de struct peut contenir un type maison au lieu d'un type primitif
     class: PlayerClass,
 }
 
