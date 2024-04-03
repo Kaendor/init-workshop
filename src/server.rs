@@ -1,6 +1,9 @@
 use std::sync::{Arc, Mutex};
 
-use axum::{extract::State, http::StatusCode, routing::post, Json, Router};
+use poem::{
+    handler, listener::TcpListener, middleware::AddData, post, web::Json, EndpointExt, Result,
+    Route, Server,
+};
 
 use crate::game::{self, Player};
 
@@ -23,29 +26,23 @@ impl AppState {
     }
 }
 
-pub fn routes() -> Router {
-    Router::new()
-        .route("/player", post(create_player))
-        .with_state(AppState::default())
-}
+pub fn routes() -> Route {}
 
-pub async fn server() {
-    let app = routes();
+pub async fn server() -> Result<(), std::io::Error> {
+    let state = AppState::default();
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
-        .await
-        .expect("unable to bind the listener on local port 3000");
+    let routes = Route::new()
+        .at("/player", post(create_player))
+        .with(AddData::new(state));
+
+    let listener = TcpListener::bind("0.0.0.0:3000");
 
     println!("Server started on 0.0.0.0:3000");
-    axum::serve(listener, app)
-        .await
-        .expect("unable to start server");
+    Server::new(listener).run(app).await
 }
 
-async fn create_player(
-    Json(payload): Json<CreatePlayer>,
-    State(state): State<AppState>,
-) -> (StatusCode, Json<Player>) {
+#[handler]
+async fn create_player(Json(payload): Json<CreatePlayer>) -> Result<Json<Player>> {
     let player = game::create_player_service(payload.pseudo);
 
     state.store_player(player.clone());
