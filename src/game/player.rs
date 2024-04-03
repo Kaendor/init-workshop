@@ -69,6 +69,7 @@ impl Player {
             (PlayerClass::DeathKnight { .. }, PlayerClass::Archer) => Some(()),
             (PlayerClass::DeathKnight { .. }, PlayerClass::Priest) => None,
             (PlayerClass::DeathKnight { .. }, PlayerClass::DeathKnight { .. }) => None,
+            // Si un cas n'est pas traité ou ignoré explicitement, Rust va nous avertir
         }
     }
 }

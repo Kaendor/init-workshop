@@ -10,7 +10,7 @@
 
 - Séparation en plusieurs groupes de taille max de 3 en mode Mob/Pair
 - Découverte d'une feature de Rust
-- Regroupement ?
+- Regroupement pour explications
 
 ## Etapes
 
@@ -20,9 +20,13 @@
 - Iterators
 - Enum
 - Pattern matching
-- Ownership
 - Tests
 - Docs
 - Traits
 - Async
+- Ownership
 
+## Point d'entrée
+
+Le point d'entrée va permettre une approche progressive du langage avec explications orale en plus de ce qui est écrit.
+`src/game/player.rs`
