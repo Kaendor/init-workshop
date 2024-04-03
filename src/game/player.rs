@@ -27,42 +27,46 @@ impl Player {
             class,
         }
     }
+
+    pub fn fight(&self, other: &Player) -> Option<()> {
+        // Ici on créer un tuple (PlayerClass,PlayerClass) afin de determiner le gagnant
+        match (self.class, other.class) {
+            (PlayerClass::Mage, PlayerClass::Mage) => todo!(),
+            (PlayerClass::Mage, PlayerClass::Archer) => todo!(),
+            (PlayerClass::Mage, PlayerClass::Priest) => todo!(),
+            (PlayerClass::Mage, PlayerClass::DeathKnight) => todo!(),
+            (PlayerClass::Archer, PlayerClass::Mage) => todo!(),
+            (PlayerClass::Archer, PlayerClass::Archer) => todo!(),
+            (PlayerClass::Archer, PlayerClass::Priest) => todo!(),
+            (PlayerClass::Archer, PlayerClass::DeathKnight) => todo!(),
+            (PlayerClass::Priest, PlayerClass::Mage) => todo!(),
+            (PlayerClass::Priest, PlayerClass::Archer) => todo!(),
+            (PlayerClass::Priest, PlayerClass::Priest) => todo!(),
+            (PlayerClass::Priest, PlayerClass::DeathKnight) => todo!(),
+            (PlayerClass::DeathKnight, PlayerClass::Mage) => todo!(),
+            (PlayerClass::DeathKnight, PlayerClass::Archer) => todo!(),
+            (PlayerClass::DeathKnight, PlayerClass::Priest) => todo!(),
+            (PlayerClass::DeathKnight, PlayerClass::DeathKnight) => todo!(),
+        }
+    }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Copy, Serialize, Deserialize, Clone)]
 enum PlayerClass {
-    Warrior,
     Mage,
     Archer,
     Priest,
-    Paladin,
-    Monk,
-    Druid,
-    Shaman,
-    Warlock,
-    Rogue,
     DeathKnight,
-    Hunter,
-    DemonHunter,
 }
 
 impl From<usize> for PlayerClass {
     fn from(value: usize) -> Self {
         match value {
-            0 => PlayerClass::Warrior,
             1 => PlayerClass::Mage,
             2 => PlayerClass::Archer,
             3 => PlayerClass::Priest,
-            4 => PlayerClass::Paladin,
-            5 => PlayerClass::Monk,
-            6 => PlayerClass::Druid,
-            7 => PlayerClass::Shaman,
-            8 => PlayerClass::Warlock,
-            9 => PlayerClass::Rogue,
             10 => PlayerClass::DeathKnight,
-            11 => PlayerClass::Hunter,
-            12 => PlayerClass::DemonHunter,
-            _ => PlayerClass::Warrior,
+            _ => PlayerClass::Mage,
         }
     }
 }
