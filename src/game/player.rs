@@ -28,6 +28,8 @@ impl Player {
         }
     }
 
+    /// Cette fonction permet de montrer l'usage des enums via les match
+    /// En plus, ce commentaire sera compilé en documentation fonctionnelle via cargo doc --open
     pub fn fight(&self, other: &Player) -> Option<()> {
         // Ici on créer un tuple (PlayerClass,PlayerClass) afin de determiner le gagnant
         match (self.class, other.class) {
