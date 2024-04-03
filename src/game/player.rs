@@ -31,22 +31,22 @@ impl Player {
     pub fn fight(&self, other: &Player) -> Option<()> {
         // Ici on créer un tuple (PlayerClass,PlayerClass) afin de determiner le gagnant
         match (self.class, other.class) {
-            (PlayerClass::Mage, PlayerClass::Mage) => todo!(),
-            (PlayerClass::Mage, PlayerClass::Archer) => todo!(),
-            (PlayerClass::Mage, PlayerClass::Priest) => todo!(),
-            (PlayerClass::Mage, PlayerClass::DeathKnight) => todo!(),
-            (PlayerClass::Archer, PlayerClass::Mage) => todo!(),
-            (PlayerClass::Archer, PlayerClass::Archer) => todo!(),
-            (PlayerClass::Archer, PlayerClass::Priest) => todo!(),
-            (PlayerClass::Archer, PlayerClass::DeathKnight) => todo!(),
-            (PlayerClass::Priest, PlayerClass::Mage) => todo!(),
-            (PlayerClass::Priest, PlayerClass::Archer) => todo!(),
-            (PlayerClass::Priest, PlayerClass::Priest) => todo!(),
-            (PlayerClass::Priest, PlayerClass::DeathKnight) => todo!(),
-            (PlayerClass::DeathKnight, PlayerClass::Mage) => todo!(),
-            (PlayerClass::DeathKnight, PlayerClass::Archer) => todo!(),
-            (PlayerClass::DeathKnight, PlayerClass::Priest) => todo!(),
-            (PlayerClass::DeathKnight, PlayerClass::DeathKnight) => todo!(),
+            (PlayerClass::Mage, PlayerClass::Mage) => None,
+            (PlayerClass::Mage, PlayerClass::Archer) => Some(()),
+            (PlayerClass::Mage, PlayerClass::Priest) => Some(()),
+            (PlayerClass::Mage, PlayerClass::DeathKnight) => None,
+            (PlayerClass::Archer, PlayerClass::Mage) => None,
+            (PlayerClass::Archer, PlayerClass::Archer) => Some(()),
+            (PlayerClass::Archer, PlayerClass::Priest) => Some(()),
+            (PlayerClass::Archer, PlayerClass::DeathKnight) => None,
+            (PlayerClass::Priest, PlayerClass::Mage) => None,
+            (PlayerClass::Priest, PlayerClass::Archer) => None,
+            (PlayerClass::Priest, PlayerClass::Priest) => None,
+            (PlayerClass::Priest, PlayerClass::DeathKnight) => Some(()),
+            (PlayerClass::DeathKnight, PlayerClass::Mage) => Some(()),
+            (PlayerClass::DeathKnight, PlayerClass::Archer) => Some(()),
+            (PlayerClass::DeathKnight, PlayerClass::Priest) => None,
+            (PlayerClass::DeathKnight, PlayerClass::DeathKnight) => None,
         }
     }
 }
