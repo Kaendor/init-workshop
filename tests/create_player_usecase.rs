@@ -1,4 +1,4 @@
-use init_workshop::{game::Player, server::routes};
+use init_workshop::{game::player::Player, server::routes};
 use poem::{http::StatusCode, test::TestClient};
 use serde_json::json;
 

@@ -1,12 +1,18 @@
-use serde::{Deserialize, Serialize};
+use self::player::Player;
 
-pub fn create_player_service(pseudo: String) -> Player {
-    Player { pseudo, level: 0 }
+pub mod player;
+
+pub trait PlayerRepository {
+    async fn store(&self, player: Player);
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Player {
-    pub pseudo: String,
-    pub level: u32,
-    // Ajouter une classe en utilisant une enum
+pub async fn create_player_service<R: PlayerRepository>(
+    pseudo: String,
+    player_repository: &R,
+) -> Player {
+    let player = Player::new(pseudo);
+
+    player_repository.store(player.clone()).await;
+
+    player
 }

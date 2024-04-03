@@ -10,7 +10,7 @@ use poem::{
     EndpointExt, IntoEndpoint, Result, Route, Server,
 };
 
-use crate::game::{self, Player};
+use crate::game::{self, player::Player, PlayerRepository};
 
 use self::payloads::CreatePlayer;
 
@@ -21,8 +21,8 @@ struct AppState {
     player_store: Arc<Mutex<Vec<Player>>>,
 }
 
-impl AppState {
-    pub fn store_player(&self, player: Player) {
+impl PlayerRepository for AppState {
+    async fn store(&self, player: Player) {
         let Ok(mut store) = self.player_store.lock() else {
             return;
         };
@@ -54,9 +54,7 @@ async fn create_player(
     Json(payload): Json<CreatePlayer>,
     state: Data<&AppState>,
 ) -> Result<(StatusCode, Json<Player>)> {
-    let player = game::create_player_service(payload.pseudo);
-
-    state.store_player(player.clone());
+    let player = game::create_player_service(payload.pseudo, *state).await;
 
     Ok((StatusCode::CREATED, Json(player)))
 }
