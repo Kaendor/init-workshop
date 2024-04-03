@@ -11,8 +11,6 @@ pub fn chapters() {
     // opérations.
     // Comme la gestion d'erreur, le logging, les maths ou autres compilations vers de l'embarqué
     // type ESP32
-    //
-    //
     let Some(_) = variables_and_control_flow() else {
         panic!("Premier niveau pas terminé");
     };
