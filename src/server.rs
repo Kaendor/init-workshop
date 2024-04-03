@@ -1,8 +1,13 @@
 use std::sync::{Arc, Mutex};
 
 use poem::{
-    handler, listener::TcpListener, middleware::AddData, post, web::Json, EndpointExt, Result,
-    Route, Server,
+    handler,
+    http::StatusCode,
+    listener::TcpListener,
+    middleware::AddData,
+    post,
+    web::{Data, Json},
+    EndpointExt, IntoEndpoint, Result, Route, Server,
 };
 
 use crate::game::{self, Player};
@@ -26,14 +31,17 @@ impl AppState {
     }
 }
 
-pub fn routes() -> Route {}
-
-pub async fn server() -> Result<(), std::io::Error> {
+pub fn routes() -> impl IntoEndpoint {
     let state = AppState::default();
-
-    let routes = Route::new()
+    let app = Route::new()
         .at("/player", post(create_player))
         .with(AddData::new(state));
+
+    app
+}
+
+pub async fn server() -> Result<(), std::io::Error> {
+    let app = routes();
 
     let listener = TcpListener::bind("0.0.0.0:3000");
 
@@ -42,10 +50,13 @@ pub async fn server() -> Result<(), std::io::Error> {
 }
 
 #[handler]
-async fn create_player(Json(payload): Json<CreatePlayer>) -> Result<Json<Player>> {
+async fn create_player(
+    Json(payload): Json<CreatePlayer>,
+    state: Data<&AppState>,
+) -> Result<(StatusCode, Json<Player>)> {
     let player = game::create_player_service(payload.pseudo);
 
     state.store_player(player.clone());
 
-    (StatusCode::CREATED, Json(player))
+    Ok((StatusCode::CREATED, Json(player)))
 }
