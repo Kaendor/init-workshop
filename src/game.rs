@@ -3,7 +3,7 @@ use self::player::Player;
 pub mod player;
 
 pub trait PlayerRepository {
-    async fn store(&self, player: Player);
+    fn store(&self, player: Player) -> impl std::future::Future<Output = ()> + Send;
 }
 
 pub async fn create_player_service<R: PlayerRepository>(

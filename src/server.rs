@@ -33,11 +33,10 @@ impl PlayerRepository for AppState {
 
 pub fn routes() -> impl IntoEndpoint {
     let state = AppState::default();
-    let app = Route::new()
-        .at("/player", post(create_player))
-        .with(AddData::new(state));
 
-    app
+    Route::new()
+        .at("/player", post(create_player))
+        .with(AddData::new(state))
 }
 
 pub async fn server() -> Result<(), std::io::Error> {

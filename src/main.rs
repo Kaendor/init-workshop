@@ -2,5 +2,5 @@ use init_workshop::server;
 
 #[tokio::main]
 async fn main() {
-    server::server().await;
+    let _ = server::server().await;
 }
