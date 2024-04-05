@@ -23,7 +23,7 @@ impl Player {
     pub fn new(pseudo: String) -> Self {
         // Par défaut, les variables en Rust sont immutables
         // Ici sans le mut, on ne pourrait pas incrémenter level
-        let mut level = 0;
+        let level = 0;
 
         // Le for en Rust prend un iterateur, ici on utilise un range
         // On peut noter l'absence de parenthèse autour de la condition
@@ -32,10 +32,11 @@ impl Player {
             level += 1;
         }
 
-        let class_id = pseudo.len() % 13;
-
         // Les méthodes statiques sont appelées avec le nom de la struct suivi de ::
-        let class = PlayerClass::from(class_id);
+        // pseudo.len() retourn un usize. Ce type représente sémantiquement une taille de tableau
+        // et est le type par référence a utiliser lors de l'accès par index a un tableau car il
+        // évite naturelle les out of bound.
+        let class = PlayerClass::from(pseudo.len());
 
         // On peut voir que le mot clé return est optionnel en Rust et que le mot clé Self permet
         // de faire référence au type implémenté dans le bloc Impl courant.
@@ -89,11 +90,12 @@ enum PlayerClass {
 
 impl From<usize> for PlayerClass {
     fn from(value: usize) -> Self {
+        let value = value % 4;
         match value {
             1 => PlayerClass::Mage,
             2 => PlayerClass::Archer,
             3 => PlayerClass::Priest,
-            10 => PlayerClass::DeathKnight { sword_length: 1.0 },
+            4 => PlayerClass::DeathKnight { sword_length: 1.0 },
             _ => PlayerClass::Mage,
         }
     }
