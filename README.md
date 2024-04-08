@@ -8,8 +8,8 @@
 
 ## Déroulé
 
-- Séparation en plusieurs groupes de taille max de 3 en mode Mob/Pair
-- Découverte d'une feature de Rust
+- Présentation globale au groupe
+- Découverte d'une feature de Rust -> séparation en petit groupe pour l'exercer
 - Regroupement pour explications
 
 ## Etapes

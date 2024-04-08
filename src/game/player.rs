@@ -27,7 +27,6 @@ impl Player {
 
         // Cas concret pour Arc
         // -> par_iter de rayon avec une lecture parallèle via un arc ?
-        // Un chaining interessant pour un Iterator
         // Un cas avec un mapping sur result en style fonctionnel et son pendant avec des try (?)
         //
         //

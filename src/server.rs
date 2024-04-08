@@ -89,6 +89,13 @@ async fn create_player(
         // coeur vous en dit. "vec of result into result of vec")
         .collect();
 
+    // On peut faire exactement la même chose avec une boucle et l'opérateur ? pour faire sauter
+    // les results à la volée.
+    // Le for prend en entrée un itérateur
+    // 1) On fait sauter le lock
+    // 2) On itère sur les joueurs en essayant de les faire level up
+    // 3) On écoute le compilateur râler
+
     let player = game::create_player_service(payload.pseudo, *state).await;
 
     Ok((StatusCode::CREATED, Json(player)))
