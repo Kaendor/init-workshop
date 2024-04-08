@@ -28,6 +28,8 @@ impl Player {
         // Le for en Rust prend un iterateur, ici on utilise un range
         // On peut noter l'absence de parenthèse autour de la condition
         // Le _ seul ou devant un nom de variable indique qu'on ne l'utilise pas
+        //
+        // Exercice: Essayer d'utiliser .map pour itérer sur le range
         for _ in 0..pseudo.len() {
             level += 1;
         }
@@ -49,6 +51,9 @@ impl Player {
 
     /// On peut noter le premier argument qui est self, il s'agit d'une référence à l'instance de la struct.
     /// Cette fonction permet de montrer l'usage des enums via les match
+    ///
+    /// Exercice: Corriger l'implem de cette fonction afin de retourner le gagnant plutôt q'une
+    /// option vide
     pub fn fight(&self, other: &Player) -> Option<()> {
         // Ici on crée un tuple (PlayerClass,PlayerClass) afin de determiner le gagnant d'un duel
         match (self.class, other.class) {
@@ -77,6 +82,8 @@ impl Player {
 
 /// Une enum Rust en plus d'être un structure qu'on retrouve ailleurs,
 /// Elle est aussi capable de contenir de l'information
+///
+/// Exercice: Ajouter des sous-classes à chaque classe
 #[derive(Debug, Copy, Serialize, Deserialize, Clone)]
 enum PlayerClass {
     Mage,
