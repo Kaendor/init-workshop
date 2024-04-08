@@ -23,6 +23,13 @@ struct AppState {
 
 impl PlayerRepository for AppState {
     async fn store(&self, player: Player) {
+        // Ce match oblige a traiter le cas où on est dans l'incapacité de lock le Mutex
+        match self.player_store.lock() {
+            Ok(mut store) => store.push(player.clone()),
+            Err(_) => return,
+        }
+
+        // Cette expression permet de faire la même chose que le match ci-dessus mais de manière plus concise et sans avoir de nesting qui se met en place
         let Ok(mut store) = self.player_store.lock() else {
             return;
         };
