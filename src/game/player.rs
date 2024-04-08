@@ -26,6 +26,7 @@ impl Player {
         let level = 0;
 
         // Cas concret pour Arc
+        // -> par_iter de rayon avec une lecture parallèle via un arc ?
         // Un chaining interessant pour un Iterator
         // Un cas avec un mapping sur result en style fonctionnel et son pendant avec des try (?)
         //
@@ -54,11 +55,12 @@ impl Player {
         }
     }
 
-    pub fn is_magic(&self) -> bool {
-        // On peut voir ici l'usage de match pour déterminer le type de la classe
-        match self.class {
-            PlayerClass::Mage => true,
-            _ => false,
+    pub fn try_level_up(mut self) -> Result<Self, String> {
+        if self.level <= 5 {
+            self.level = self.level + 1;
+            Ok(self)
+        } else {
+            Err("Already at max level".to_string())
         }
     }
 
