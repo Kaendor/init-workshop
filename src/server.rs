@@ -60,6 +60,15 @@ async fn create_player(
     Json(payload): Json<CreatePlayer>,
     state: Data<&AppState>,
 ) -> Result<(StatusCode, Json<Player>)> {
+    let players: Vec<_> = state
+        .player_store
+        .try_lock()
+        .iter()
+        .flat_map(|s| s.iter())
+        .filter(|p| p.is_magic())
+        .cloned()
+        .collect();
+
     let player = game::create_player_service(payload.pseudo, *state).await;
 
     Ok((StatusCode::CREATED, Json(player)))

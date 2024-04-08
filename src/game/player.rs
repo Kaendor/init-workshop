@@ -25,6 +25,11 @@ impl Player {
         // Ici sans le mut, on ne pourrait pas incrémenter level
         let level = 0;
 
+        // Cas concret pour Arc
+        // Un chaining interessant pour un Iterator
+        // Un cas avec un mapping sur result en style fonctionnel et son pendant avec des try (?)
+        //
+        //
         // Le for en Rust prend un iterateur, ici on utilise un range
         // On peut noter l'absence de parenthèse autour de la condition
         // Le _ seul ou devant un nom de variable indique qu'on ne l'utilise pas
@@ -46,6 +51,14 @@ impl Player {
             pseudo,
             level,
             class,
+        }
+    }
+
+    pub fn is_magic(&self) -> bool {
+        // On peut voir ici l'usage de match pour déterminer le type de la classe
+        match self.class {
+            PlayerClass::Mage => true,
+            _ => false,
         }
     }
 
