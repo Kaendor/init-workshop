@@ -56,6 +56,7 @@ pub async fn server() -> Result<(), std::io::Error> {
 }
 
 #[handler]
+// TODO: Rajouter du json schema en sortie en utilisant schemars et serde
 async fn create_player(
     Json(payload): Json<CreatePlayer>,
     state: Data<&AppState>,
