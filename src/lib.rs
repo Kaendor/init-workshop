@@ -11,7 +11,5 @@
 //! Pour les autres IDE, vous pouvez utiliser le LSP de rust-analyzer si votre IDE supporte les
 //! LSP.
 
-mod enums;
 pub mod game;
-mod iterators;
 pub mod server;
