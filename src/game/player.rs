@@ -61,7 +61,7 @@ impl Player {
     /// On peut noter le premier argument qui est self, il s'agit d'une référence à l'instance de la struct.
     /// Cette fonction permet de montrer l'usage des enums via les match
     ///
-    /// Exercice: Corriger l'implem de cette fonction afin de retourner le gagnant plutôt q'une
+    /// Exercice: Modifier l'implem de cette fonction afin de retourner le gagnant plutôt q'une
     /// option vide
     pub fn fight(&self, other: &Player) -> Option<()> {
         // Ici on crée un tuple (PlayerClass,PlayerClass) afin de determiner le gagnant d'un duel
@@ -92,7 +92,7 @@ impl Player {
 /// Une enum Rust en plus d'être un structure qu'on retrouve ailleurs,
 /// Elle est aussi capable de contenir de l'information
 ///
-/// Exercice: Ajouter des sous-classes à chaque classe
+/// Exercice: Ajouter un variant et faire compiler le code
 #[derive(Debug, Copy, Serialize, Deserialize, Clone)]
 enum PlayerClass {
     Mage,
