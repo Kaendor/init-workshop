@@ -20,11 +20,11 @@
 - Iterators
 - Enum
 - Pattern matching
+- Ownership
 - Tests
 - Docs
 - Traits
 - Async
-- Ownership
 
 ## Point d'entrée
 
